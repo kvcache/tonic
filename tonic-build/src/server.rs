@@ -455,7 +455,7 @@ fn generate_unary<T: Method>(
     server_trait: Ident,
     use_arc_self: bool,
 ) -> TokenStream {
-    let codec_name = syn::parse_str::<syn::Path>(method.codec_path()).unwrap();
+    let codec_name = syn::parse_str::<syn::Path>(&method.codec_path()).unwrap();
 
     let service_ident = quote::format_ident!("{}Svc", method.identifier());
 
@@ -515,7 +515,7 @@ fn generate_server_streaming<T: Method>(
     use_arc_self: bool,
     generate_default_stubs: bool,
 ) -> TokenStream {
-    let codec_name = syn::parse_str::<syn::Path>(method.codec_path()).unwrap();
+    let codec_name = syn::parse_str::<syn::Path>(&method.codec_path()).unwrap();
 
     let service_ident = quote::format_ident!("{}Svc", method.identifier());
 
@@ -585,7 +585,7 @@ fn generate_client_streaming<T: Method>(
     let service_ident = quote::format_ident!("{}Svc", method.identifier());
 
     let (request, response) = method.request_response_name(proto_path, compile_well_known_types);
-    let codec_name = syn::parse_str::<syn::Path>(method.codec_path()).unwrap();
+    let codec_name = syn::parse_str::<syn::Path>(&method.codec_path()).unwrap();
 
     let inner_arg = if use_arc_self {
         quote!(inner)
@@ -642,7 +642,7 @@ fn generate_streaming<T: Method>(
     use_arc_self: bool,
     generate_default_stubs: bool,
 ) -> TokenStream {
-    let codec_name = syn::parse_str::<syn::Path>(method.codec_path()).unwrap();
+    let codec_name = syn::parse_str::<syn::Path>(&method.codec_path()).unwrap();
 
     let service_ident = quote::format_ident!("{}Svc", method.identifier());
 
